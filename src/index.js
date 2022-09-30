@@ -11,8 +11,10 @@ const countryInfo = document.querySelector('.country-info');
 
 countryInput.addEventListener('input', debounce(callback, DEBOUNCE_DELAY));
 
-function callback() {
+function callback(ev) {
   if (!countryInput.value) {
+    countryList.innerHTML = '';
+    countryInfo.innerHTML = '';
     return;
   }
 
@@ -53,7 +55,6 @@ function callback() {
       }
     })
     .then(parsed => {
-      console.log(parsed);
       if (typeof parsed === 'object') {
         countryList.innerHTML = parsed[Object.keys(parsed)[0]];
         countryInfo.innerHTML = parsed[Object.keys(parsed)[1]];
